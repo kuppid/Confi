@@ -1,0 +1,53 @@
+<%- include('header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-12">
+        <h1 class="mb-4">Новая заявка</h1>
+
+
+<% if (typeof errors !== 'undefined' && errors.length) { %>
+    <div class="alert alert-danger">
+        <% errors.forEach(e=>  { %>
+            <div><%= e %></div>
+
+    <%    })  %>
+    </div>
+
+<% } %>
+
+    <form method="POST" action="/create">
+        <div class="mb-3">
+            <label class="form-label">Помещения</label>
+            <select class="form-select" name="room_id" required>
+  <option value="" disabled selected>Выберите помещение</option>
+  <% rooms.forEach(r => { %>
+    <option value="<%= r.id %>"><%= r.type %> - <%= r.name %> (<%= r.capacity %> чел.)</option>
+  <% }) %>
+</select>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Дата начал конференции</label>
+            <input type="date" class="form-control" name="date_start" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Способ оплаты</label>
+            <select class="form-select" name="payment_id" required>
+                <option value="" disabled selected>Выберите способ оплаты</option>
+                <% payments.forEach(p => { %>
+                    <option value="<%= p.id %>"><%= p.name %></option>
+                <% }) %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Отправить заявку</button>
+    </form>
+
+    <p class="mt-3 text-center">
+        <a href="/dashboard">Вернуться к моим заявкам</a>
+    </p>
+</div>
+</div>
+<%- include('footer') %>
+

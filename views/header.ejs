@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= typeof title !== 'undefined' ? title + ' — Конференции.РФ' : 'Конференции.РФ' %></title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/img/favico1.ico">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg site-nav" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">Конференции<span class="brand-dot">.</span>РФ</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Меню">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/rooms">Помещения</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">О портале</a></li>
+      </ul>
+      <ul class="navbar-nav align-items-lg-center gap-lg-2">
+        <% if (user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= user.role === 'admin' ? '/admin' : '/dashboard' %>">
+              <%= user.role === 'admin' ? 'Админ-панель' : 'Личный кабинет' %> · <%= user.fio %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <form method="POST" action="/logout" class="m-0">
+              <button class="btn btn-sm btn-outline-light">Выйти</button>
+            </form>
+          </li>
+        <% } else { %>
+          <li class="nav-item"><a class="nav-link" href="/login">Вход</a></li>
+          <li class="nav-item"><a class="btn btn-sm btn-accent" href="/register">Регистрация</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main class="container flex-grow-1 py-4">

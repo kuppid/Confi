@@ -1,0 +1,14 @@
+<%- include('header') %>
+<h1 class="mb-3"><%= title %></h1>
+<div class="row g-3">
+  <% rooms.forEach(function (r) { %>
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body d-flex flex-column">
+      <h5 class="card-title"><%= r.name %></h5>
+      <p class="card-text text-muted mb-1">Тип: <%= r.type %></p>
+      <p class="card-text">Вместимость: <strong><%= r.capacity %></strong> чел.</p>
+      <a class="btn btn-primary mt-auto" href="/create">Забронировать</a>
+    </div></div></div>
+  <% }); %>
+  <% if (!rooms.length) { %><p>Помещений пока нет.</p><% } %>
+</div>
+<%- include('footer') %>
